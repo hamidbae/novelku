@@ -35,7 +35,7 @@ if(mysqli_num_rows($result) == 1)
 	$_SESSION['id_role'] = $row['id_role'];
     // redirect
     echo "<script>
-        window.location.replace('index.php?page=default');
+        window.location.replace('index.php?page=novel');
     </script>";
 }
 else

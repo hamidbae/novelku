@@ -7,7 +7,7 @@
     }
 
     // tuliskan query untuk mengambil data di dalam tabel
-    $sql = "select * from novel as a join rating as b on b.id_novel = a.id_novel where soft_delete=0 and a.id_novel=".$_GET['id'];
+    $sql = "select * from novel as a left join rating as b on b.id_novel = a.id_novel where soft_delete=0 and a.id_novel=".$_GET['id'];
     $result = mysqli_query($conn, $sql);
     $row = mysqli_fetch_assoc($result);
 
@@ -15,7 +15,7 @@
     select avg(b.rating) as avg, count(b.rating) as count from novel as a 
     join rating as b 
     on b.id_novel = a.id_novel
-    where soft_delete=0 and a.id_novel=1";
+    where soft_delete=0 and a.id_novel=".$_GET['id'];
     $result2 = mysqli_query($conn, $sql2);
     $row2 = mysqli_fetch_assoc($result2);
 
@@ -28,25 +28,20 @@
         </div>
         <div class="col-4">
 
-            <h3><?php echo $row['id_novel'];?></h3>
-            <h3><?php echo $row['judul_novel'];?></h3>
-            <form action="index.php?page=baca_novel&id=1">
-
-            </form>
+            <!-- <h3><?php echo $row['id_novel'];?></h3> -->
+            <h4>Novel : <?php echo $row['judul_novel'];?></h4>
+            <h4>Sinopsis</h4>
+            <p><?php echo $row['sinopsis'];?></p>
+            <h4>Rating</h4>
+            <p><?php echo $row2['avg'];?> (<?php echo $row2['count'];?> users)</p>
+            <h4>Input rating</h4>
             <form action="?page=simpan_rating" method="post">
-                <h4>Rating</h4>
                 <input type="number" name="rating" min="0" max="10">
                 <input type="hidden" name="id_novel" value="<?php print_r($_GET["id"]);?>">
-                <!-- <button type="submit" class="btn btn-primary btn-sm">Ok</button> -->
-                <input type="submit" class="btn btn-primary" value="Simpan" />
-
-            </form>   
-            <h5>Sinopsis</h5>
-            <p><?php echo $row['sinopsis'];?></p>
-            <p><?php echo $row2['avg'];?> (<?php echo $row2['count'];?> users)</p>
-            <p></p>
+                <input type="submit" class="btn btn-sm btn-primary" value="Simpan"/>
+            </form>
             
-            <p><?php print_r($_SESSION);?></p>
+            <!-- <p><?php print_r($_SESSION);?></p> -->
             <!-- <p><?php print_r($_POST);?></p> -->
             <!-- <?php print_r($_GET["id"]);?> -->
         </div>

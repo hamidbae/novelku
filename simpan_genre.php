@@ -19,7 +19,7 @@ if(isset($_GET['id']))
     // new data
     $sql = "INSERT INTO genre (nama_genre) VALUES ('$genre')";
 
-    }
+}
 
 mysqli_query($conn, $sql);
 
