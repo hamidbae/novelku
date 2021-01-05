@@ -11,9 +11,13 @@ if(defined("GELANG") === false)
     $id_novel = $_POST['id_novel'];
     $rating = $_POST['rating'];
 
-    // print_r($_POST);
+    print_r($_POST);
     // print_r($_SESSION);
 
+    // echo "novel " . $id_novel;
+
+    // echo "$id_user;
+    // echo $rating;
 
     $sql = "INSERT INTO rating (id_user, id_novel, rating) VALUES ('$id_user', '$id_novel', '$rating')";
 
